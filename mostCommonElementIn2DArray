@@ -1,0 +1,70 @@
+import java.util.Random;
+import java.util.Scanner;
+
+public class mostCommonElementIn2d {
+	public static void main(String[] args) {
+		int[][] arr = generateRandom2DArr();
+		// int[][] arr = arr2DInitialization();
+		arrDisplay2D(arr);
+		int cnt, element = arr[0][0], numberRepeats = 0;
+		for (int i = 0; i < arr.length; i++) {
+			for (int j = 0; j < arr[i].length; j++) {
+				cnt = 0;
+				for (int j2 = i; j2 < arr.length; j2++) {
+					for (int k = 0; k < arr[j2].length; k++) {
+						if (arr[i][j] == arr[j2][k]) {
+							cnt++;
+						}
+					}
+				}
+				if (cnt > numberRepeats) {
+					element = arr[i][j];
+					numberRepeats = cnt;
+				}
+			}
+		}
+		System.out.println("the fist most common element is " + element + " .It is seen " + numberRepeats + " times");
+	}
+
+	static int[][] arr2DInitialization() {
+		Scanner sc = new Scanner(System.in);
+		int row, col;
+		do {
+			System.out.println("how many rows? ");
+			row = sc.nextInt();
+		} while (row < 2);
+		do {
+			System.out.println("how many coloumns ?");
+			col = sc.nextInt();
+		} while (col < 2);
+		int[][] mas = new int[row][col];
+		for (int i = 0; i < mas.length; i++) {
+			for (int j = 0; j < mas[i].length; j++) {
+				System.out.println("enter element " + (i + 1) + " " + (j + 1));
+				mas[i][j] = sc.nextInt();
+			}
+		}
+		return mas;
+
+	}
+
+	static void arrDisplay2D(int[][] arr) {
+		for (int i = 0; i < arr.length; i++) {
+			for (int j = 0; j < arr[i].length; j++) {
+				System.out.print(arr[i][j] + " ");
+			}
+			System.out.println();
+		}
+	}
+
+	static int[][] generateRandom2DArr() {
+		Random rd = new Random();
+		int[][] arr = new int[2 + rd.nextInt(5)][2 + rd.nextInt(3)];
+		for (int i = 0; i < arr.length; i++) {
+			for (int j = 0; j < arr[i].length; j++) {
+				arr[i][j] = rd.nextInt(20);
+			}
+		}
+		return arr;
+	}
+}
